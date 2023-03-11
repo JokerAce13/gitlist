@@ -40,4 +40,23 @@ function Button({ text, link, className, icon }) {
     )
 }
 
+export const ButtonContrast = styled(Button)`
+    background-color: var(--white);
+    color: var(--buttonBg);
+    &:hover {
+        background-color: var(--buttonBg);
+        color: var(--white);
+    }
+`
+
+export const ButtonRounded = styled(Button)`
+    border-radius: 50%;
+    min-inline-size: initial;
+    padding: .75rem;
+    &:hover {
+        background-color: var(--buttonBg);
+        transform: scale(1.1);
+    }
+`
+
 export default Button

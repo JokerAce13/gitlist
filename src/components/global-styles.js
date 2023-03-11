@@ -27,10 +27,10 @@ const GlobalStylesStyled = createGlobalStyle`
     }
 
     body {
-        border: 10px solid blue;
         background-color: var(--bg);
         color: var(--grey);
         font: var(--body1-regular);
+        margin: 0;
     }
 `
 

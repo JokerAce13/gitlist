@@ -22,7 +22,6 @@ root.render(
   <React.StrictMode>
     <GlobalStylesStyled />
     <RouterProvider router={router} />
-    <App />
   </React.StrictMode>
 );
 

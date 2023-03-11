@@ -7,10 +7,6 @@ import Icon from './icon'
 const ProfileStyled = styled.div`
     grid-area: profile;
 
-    .custom {
-        border: 1px solid red;
-    }
-
     .avatar {
         border-radius: 50%;
         border: 1px solid var(--grey);
@@ -33,7 +29,6 @@ const ProfileStyled = styled.div`
     }
 
     .info {
-        border: 1px solid red;
         color: var(--grey);
         text-decoration: none;
         display: flex;

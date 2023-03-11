@@ -8,6 +8,7 @@ import Search from './components/search';
 import { useState, useEffect } from 'react';
 import { getUser, getRepos } from './services/users';
 import { useParams } from 'react-router-dom'
+import Modal from './components/modal';
 
 // const repoList = [
 //   {
@@ -23,6 +24,8 @@ import { useParams } from 'react-router-dom'
 function App() {
   const [user, setUser] = useState({})
   const [repos, setRepos] = useState([])
+  const [modal, setModal] = useState(false)
+  const [search, setSearch] = useState('')
   let username = useParams().user
   if (!username) {
     username = 'defunkt'
@@ -40,9 +43,9 @@ function App() {
       setUser(data)
 
     })
-  },[])
+  // },[])
 
-  useEffect(() => {
+  // useEffect(() => {
     getRepos(username).then(({ data, isError}) => {
       if (isError) {
         console.log(`El usuario ${username} no tiene repositorios`)
@@ -50,14 +53,15 @@ function App() {
       }
       setRepos(data)
     })
-  },[])
+  },[username])
 
   return (
     <Layout>
+      <Modal isActive={modal} setModal={setModal} />
       <Profile {...user} />
-      <Filters/>
-      <RepoList repoList={repos}/>
-      <Search/>
+      <Filters setSearch={setSearch} repoListCount={repos.length}/>
+      <RepoList repoList={repos} search={search} />
+      <Search setModal={setModal} />
     </Layout>
   );
 }
