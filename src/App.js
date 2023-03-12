@@ -4,35 +4,22 @@ import Profile from './components/profile';
 import Filters from './components/filters';
 import RepoList from './components/repo-list';
 import Search from './components/search';
-// import repoData from './components/repo-data';
 import { useState, useEffect } from 'react';
 import { getUser, getRepos } from './services/users';
 import { useParams } from 'react-router-dom'
 import Modal from './components/modal';
-
-// const repoList = [
-//   {
-//     id: 123,
-//     name: 'Mi primer proyecto en React'
-//   },
-//   {
-//     id: 124,
-//     name: 'Mi segundo proyecto en React'
-//   }
-// ]
 
 function App() {
   const [user, setUser] = useState({})
   const [repos, setRepos] = useState([])
   const [modal, setModal] = useState(false)
   const [search, setSearch] = useState('')
+  const [language, setLanguage] = useState('')
+  const [order, setOrder] = useState('')
   let username = useParams().user
   if (!username) {
-    username = 'defunkt'
+    username = 'leonidasesteban'
   }
-  // const username = 'defunkt'
-  // const username = 'leonidasesteban'
-  //const username = 'JokerAce13'
 
   useEffect(() => {
     getUser(username).then(({ data, isError}) => {
@@ -43,9 +30,7 @@ function App() {
       setUser(data)
 
     })
-  // },[])
 
-  // useEffect(() => {
     getRepos(username).then(({ data, isError}) => {
       if (isError) {
         console.log(`El usuario ${username} no tiene repositorios`)
@@ -59,8 +44,18 @@ function App() {
     <Layout>
       <Modal isActive={modal} setModal={setModal} />
       <Profile {...user} />
-      <Filters setSearch={setSearch} repoListCount={repos.length}/>
-      <RepoList repoList={repos} search={search} />
+      <Filters
+        setSearch={setSearch}
+        setLanguage={setLanguage}
+        setOrder={setOrder}
+        repoListCount={repos.length}
+      />
+      <RepoList
+        repoList={repos}
+        search={search}
+        language={language}
+        order={order}
+      />
       <Search setModal={setModal} />
     </Layout>
   );

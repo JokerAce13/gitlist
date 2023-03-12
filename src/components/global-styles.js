@@ -11,6 +11,8 @@ const GlobalStylesStyled = createGlobalStyle`
         --grey-2: #c5ced7;
         --grey-3: #15223A;
         --pink: #cc68a0;
+        --bluelight: #c6dbff;
+        --blue: #9cbbec;
         --yellow: #f1e05a;
         --purple: #563d7c;
         --black-2: #171b21;
@@ -31,6 +33,13 @@ const GlobalStylesStyled = createGlobalStyle`
         color: var(--grey);
         font: var(--body1-regular);
         margin: 0;
+    }
+
+    @media screen and (prefers-color-scheme: light) {
+        body {
+            background-color: var(--white);
+            color: var(--black);
+        }
     }
 `
 

@@ -21,7 +21,14 @@ const ButtonStyled = styled.button`
         text-decoration: none;
     }
 
-
+    @media screen and (prefers-color-scheme: light) {
+        background-color: var(--white);
+        color: var(--buttonBg);
+        &:hover {
+            background-color: var(--buttonBg);
+            color: var(--white);
+        }
+    }
 `
 
 function Button({ text, link, className, icon }) {
@@ -49,6 +56,10 @@ export const ButtonContrast = styled(Button)`
     }
 `
 
+export const ButtonAuto = styled(Button)`
+    min-inline-size: initial;
+`
+
 export const ButtonRounded = styled(Button)`
     border-radius: 50%;
     min-inline-size: initial;
@@ -56,6 +67,12 @@ export const ButtonRounded = styled(Button)`
     &:hover {
         background-color: var(--buttonBg);
         transform: scale(1.1);
+    }
+
+    @media screen and (prefers-color-scheme: light) {
+        &:hover {
+            background-color: var(--white);
+        }
     }
 `
 

@@ -7,21 +7,6 @@ import { ButtonContrast } from "./button"
 import InputText from "./input-text"
 import ReactDOM from "react-dom"
 
-// class Modal extends React.Component {
-
-//     state = { a: 1, b: 3}
-
-//     componentDidMount(){
-//         setTimeout(() => {
-//             this.setState({ a: 2, b: 4 })
-//         }, 3000)
-//     }
-
-//     componentDidUpdate(){
-//         console.log('Se ha actualizado el componente')
-//     }
-// }
-
 const modalRoot = document.getElementById('portal')
 
 // Inicio: Componente basado en clase
@@ -39,10 +24,6 @@ class ModalPortal extends React.Component {
     componentWillUnmount(){
         modalRoot.removeChild(this.el)
     }
-
-    //     componentDidUpdate(){
-    //         console.log('Se ha actualizado el componente')
-    //     }
 
     render(){
         return ReactDOM.createPortal(this.props.children, this.el)
@@ -62,7 +43,6 @@ export default function Modal({ isActive, setModal }){
 
 // Fin: Componente basado en clase
 
-
 const ModalContentStyled = styled.form`
     background-color: var(--bg);
     color: var(--white);
@@ -80,6 +60,12 @@ const ModalContentStyled = styled.form`
     .title {
         font: var(--headline2-semi-bold);
         margin: 0;
+    }
+
+    @media screen and (prefers-color-scheme: light) {
+        background-color: var(--white);
+        color: var(--bg);
+        border: 1px solid var(--bg);
     }
 `
 
@@ -104,5 +90,3 @@ function ModalContent({setModal}) {
         </Overlay>
     )
 }
-
-// export default ModalContent

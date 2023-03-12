@@ -9,11 +9,21 @@ const SelectorStyled = styled.select`
     border: none;
     font: var(--body2-semi-bold);
     text-transform: capitalize;
+
+    @media screen and (max-width: 768px){
+        font-size: 10px;
+    }
+
+    @media screen and (prefers-color-scheme: light) {
+        background-color: var(--white);
+        color: var(--buttonBg);
+        border: 1px solid var(--grey);
+    }
 `
 
-function Selector({ children }) {
+function Selector({ children, onChange }) {
     return (
-        <SelectorStyled>
+        <SelectorStyled onChange={onChange}>
             {children}
         </SelectorStyled>
     )

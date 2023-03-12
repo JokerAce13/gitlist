@@ -9,5 +9,10 @@ const InputText = styled.input`
     font: var(--body2-regular);
     color: var(--white);
     flex: 1;
+
+    @media screen and (prefers-color-scheme: light) {
+        background-color: var(--white);
+        color: var(--bg);
+    }
 `
 export default InputText

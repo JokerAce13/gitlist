@@ -24,11 +24,14 @@ const languages = {
     javascript: {
         color: 'yellow'
     },
+    python: {
+        color: 'orange'
+    },
 }
 
 function Language({ name }) {
     const formatedName = name.toLowerCase()
-    const color = languages[formatedName] ? languages[formatedName].color : 'white'
+    const color = languages[formatedName] ? languages[formatedName].color : 'blue'
     return (
         <LanguageStyled color={color}>
             {name}

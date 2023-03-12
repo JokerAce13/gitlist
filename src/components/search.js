@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { isDarkMode } from '../utils/utilities'
 import Icon from './icon'
 import { ButtonRounded } from './button'
 
@@ -17,7 +18,7 @@ function Search({ setModal }) {
     return (
         <SearchStyled onClick={handleClick}>
             <ButtonRounded
-                icon={<Icon name="search" size="24" />}
+                icon={<Icon name="search" size="24" color={isDarkMode() ? 'white' : 'black'} />}
              />
         </SearchStyled>
     )

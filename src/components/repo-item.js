@@ -1,15 +1,35 @@
 import styled from 'styled-components'
 import Language from './language'
 import Icon from './icon'
+import { ButtonAuto } from './button'
+import activityLine from '../assets/activity-line.png'
 
 const RepoItemStyled = styled.div`
     padding-block: 1rem;
     border-block-end: 1px solid var(--grey);
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     gap: 1rem;
     &:last-child {
         border-block-end: none;
+    }
+
+    .repo-item-info {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        max-inline-size: 16rem;
+    }
+
+    .repo-item-stats {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: space-between;
+
+        button {
+            inline-size: fit-content;
+        }
     }
 
     .title {
@@ -19,6 +39,9 @@ const RepoItemStyled = styled.div`
         a {
             color: var(--primary);
             text-decoration: none;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
     }
 
@@ -65,6 +88,29 @@ const RepoItemStyled = styled.div`
             text-transform: uppercase;
         }
     }
+
+    @media screen and (max-width: 768px){
+        flex-direction: column;
+
+        .repo-item-stats {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+
+        }
+    }
+
+    @media screen and (prefers-color-scheme: light) {
+
+        .topicItem {
+            background-color: var(--bluelight);
+            color: var(--primary);
+        }
+
+        .details-item{
+            color: var(--black);
+        }
+    }
 `
 
 function RepoItem(props) {
@@ -75,49 +121,61 @@ function RepoItem(props) {
     const timeAgo = new Intl.RelativeTimeFormat('es').format(diffDays, 'days')
     return (
         <RepoItemStyled>
-            <h3 className='title'>
-                <a href={props.owner.html_url} target="_blank" rel="noreferrer" >
-                    {props.name}
-                </a>
-                {
-                    props.private ? null : (<span className='public'>Public</span>)
-                }
-            </h3>
-            {
-                props.description ? (
-                    <p className='description'>
-                        { props.description }
-                    </p>
-                ) : null
-            }
-            {
-                props.topics.length ? (
-                    <div className='topicList'>
+            {/* <div className='repo-item'> */}
+                <div className='repo-item-info'>
+                    <h3 className='title'>
+                        <a href={props.owner.html_url} target="_blank" rel="noreferrer" >
+                            {props.name}
+                        </a>
                         {
-                            props.topics.map(item => <span className='topicItem' key={item}>{item}</span>)
+                            props.private ? null : (<span className='public'>Public</span>)
                         }
-                    </div>
-                ) : null
-            }
+                    </h3>
+                    {
+                        props.description ? (
+                            <p className='description'>
+                                { props.description }
+                            </p>
+                        ) : null
+                    }
+                    {
+                        props.topics.length ? (
+                            <div className='topicList'>
+                                {
+                                    props.topics.map(item => <span className='topicItem' key={item}>{item}</span>)
+                                }
+                            </div>
+                        ) : null
+                    }
 
-            <div className='details'>
-                {
-                    props.language ? (
-                        <Language name={props.language} />
-                    ) : null
-                }
-                <span className='details-item'>
-                    <Icon name='star' />
-                    <span>{props.stargazers_count}</span>
-                </span>
-                <span className='details-item'>
-                    <Icon name='branch' />
-                    <span>{props.forks_count}</span>
-                </span>
-                <span className='details-item'>
-                    <span className='date'>{timeAgo}</span>
-                </span>
-            </div>
+                    <div className='details'>
+                        {
+                            props.language ? (
+                                <Language name={props.language} />
+                            ) : null
+                        }
+                        <span className='details-item'>
+                            <Icon name='star' />
+                            <span>{props.stargazers_count}</span>
+                        </span>
+                        <span className='details-item'>
+                            <Icon name='branch' />
+                            <span>{props.forks_count}</span>
+                        </span>
+                        <span className='details-item'>
+                            <span className='date'>{timeAgo}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className='repo-item-stats'>
+                    <ButtonAuto
+                        text="Star"
+                        icon={<Icon name="star" size="20" color="var(--grey)" />}
+                    />
+                    {/* <img src={"../../public/activity-line.png"} alt="Linea de actividad" /> */}
+                    <img src={activityLine} alt="Linea de actividad" />
+                </div>
+            {/* </div> */}
         </RepoItemStyled>
     )
 }
